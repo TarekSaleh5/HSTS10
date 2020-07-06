@@ -52,9 +52,8 @@ public class InitlizeDataBase {
 		configuration.addAnnotatedClass(Teacher.class);
 		configuration.addAnnotatedClass(Student.class);
 		configuration.addAnnotatedClass(Manager.class);
-		configuration.addAnnotatedClass(checkedExam.class);
 		configuration.addAnnotatedClass(solvedExam.class);
-
+		configuration.addAnnotatedClass(checkedExam.class);
 
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -396,25 +395,25 @@ public class InitlizeDataBase {
 
 	
 	public static <T> List<T> getAll(Class<T> object) 
-	{
-		System.out.println("getal11111111111");
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		System.out.println("getal2222222222222");
-		CriteriaQuery<T> criteriaQuery = builder.createQuery(object);
-		System.out.println("getal333333333333");
-		Root<T> rootEntry = criteriaQuery.from(object);
-		System.out.println("getall44444444444444");
-		CriteriaQuery<T> allCriteriaQuery = criteriaQuery.select(rootEntry);
+	{		
+		session.flush();
+		session.getTransaction().commit();
 		
-		System.out.println("getall55555555555");
+		session.beginTransaction();
+		
+
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = builder.createQuery(object);
+		Root<T> rootEntry = criteriaQuery.from(object);
+		CriteriaQuery<T> allCriteriaQuery = criteriaQuery.select(rootEntry);
 		TypedQuery<T> allQuery = session.createQuery(allCriteriaQuery);
-		System.out.println("getall666666666666666666");
 		return allQuery.getResultList();
 	}
 	
 
 	public static List<Teacher> getAllteachers()
 	{
+		session.flush();
 		List<Teacher> teachers = new  ArrayList<Teacher>();
 		teachers = getAll(Teacher.class);
 		return teachers;
@@ -427,14 +426,29 @@ public class InitlizeDataBase {
 	}
 	
 	public static List<solvedExam> getallsolvedExam() {
-		System.out.println("initttttt11");
+		System.out.println("getallsolvedExam");
+	
+		session.flush(); 
+		
+	
+		System.out.println("getallsolvedExam1hhhhhhhhhhhhhhhhhhhhhhhhhhh1");
+		
+		
+		
 		List<solvedExam> solvedexam = new ArrayList<solvedExam>();
 		solvedexam = getAll(solvedExam.class);
-		File file;
-		System.out.println("initttttt22");
-		for (solvedExam solved : solvedexam) {
-			file=solved.getFile();
-		}
+		System.out.println("getallsolvedExam1");
+	//	File file;
+	//	for (solvedExam solved : solvedexam) {
+	//		file=solved.getFile();
+	//	}
+	
+		System.out.println(solvedexam.size()+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+		System.out.println(solvedexam.get(0).getcheckedornot());
+		System.out.println(solvedexam.get(0).getId());
+		System.out.println(solvedexam.get(0).getExplainationForGradeChanging());
+		
+		System.out.println(solvedexam.get(0).getGeneralCommentString());
 		return solvedexam;
 	}
 
@@ -442,16 +456,16 @@ public class InitlizeDataBase {
 	
 	
 	public static List<Exam> getAllexams() {
+		session.flush();
 		List<Exam> exams = new ArrayList<Exam>();
 		exams = getAll(Exam.class);
+		System.out.println(exams.size());
 		return exams;
 	}
 	
 	public static List<solvedExam> getSolvedExamByStudentID(String student_id){
 		List<solvedExam> exams = new ArrayList<solvedExam>();
-		System.out.println("gggggggggggggggggggggggggg");
 		exams = getAll(solvedExam.class);
-		System.out.println("sssssssssssssssssssssssss");
 		for(solvedExam exam : exams)
 		{
 			if (Integer.toString(exam.getId()).equals(student_id))
@@ -459,7 +473,6 @@ public class InitlizeDataBase {
 				exams.add(exam);
 			}
 		}
-		System.out.println("ddddddddddddddddddddddddddd");
 		return exams;
 	}
 	
@@ -638,7 +651,7 @@ public class InitlizeDataBase {
 			initializeData();
 			}
 			else {		    
-				session.beginTransaction();       //////love u session transicion
+				session.beginTransaction();       
 			}
 			
 			

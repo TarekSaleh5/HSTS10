@@ -39,7 +39,7 @@ public class SimpleClient extends AbstractClient {
 
 	public void handleLoginIn(String[] arr) throws IOException {
 		commandRequest = true;
-		whatiam = arr[2];// TeatcherORManger
+		whatiam = arr[2]; // TeatcherORManger
 		command = new Command(arr, CommandType.loginCommand);
 		SimpleClient.getClient().sendToServer(command);
 		waitForServerResponse();
@@ -69,16 +69,14 @@ public class SimpleClient extends AbstractClient {
 		commandRequest = true;
 		command = new Command(arr, CommandType.startExamCommand);
 		SimpleClient.getClient().sendToServer(command);
-		System.out.println("aaaaaaaaaaaaaaa");
 		waitForServerResponse();
-		System.out.println("bbbbbbbbbbb");
 
 		handleStartExamCommandFromServer();
 
 	}
 
 	private void handleStartExamCommandFromServer() throws IOException {
-		System.out.println("handleStartExam111111111");
+		System.out.println("handleStartExam");
 		Exam msg = (Exam) command.getCommand();
 		App.getInstance().StartExamAnswer(msg);
 
@@ -102,9 +100,7 @@ public class SimpleClient extends AbstractClient {
 		System.out.println("handleSignin");
 		String[] msg = (String[]) command.getCommand();
 
-		System.out.println(msg[0]);
-		System.out.println(msg[1]);
-		System.out.println("msg[1]= " + msg[1]);
+		
 		switch (msg[1]) {
 
 		case ("student"):
@@ -112,13 +108,16 @@ public class SimpleClient extends AbstractClient {
 			break;
 
 		case ("teacher"):
-			App.getInstance().showTeacherView();
+			App.getInstance().showTeacherView(msg);
 			break;
 
 		case ("manager"):
-			App.getInstance().showManagerView();
+			App.getInstance().showManagerView(msg);
 			break;
-
+			
+		case ("nointerfacechoosen"):
+			App.getInstance().addingTextToCodeOrId("primary.fxml", "nointerfacechoosen");
+			break;
 		}
 
 		/*
@@ -222,7 +221,7 @@ public class SimpleClient extends AbstractClient {
 	}
 
 	public void handleAddQuestionFromServer() throws IOException {
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 
 	}
 
@@ -321,7 +320,7 @@ public class SimpleClient extends AbstractClient {
 
 	private void handlesavingtheeditedexamFromServer() throws IOException {
 
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 	}
 
 	public void handleSavingTheExamWithQuestions(Object[] examInfoObjects1) throws IOException {
@@ -335,7 +334,7 @@ public class SimpleClient extends AbstractClient {
 
 	private void handleSavingTheExamWithQuestionsFromServer() throws IOException {
 
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 	}
 
 	public void handleBringingExamsInfo(int courseId) throws IOException {
@@ -372,7 +371,7 @@ public class SimpleClient extends AbstractClient {
 	}
 
 	private void handleGivingCodeToExamFromServer() throws IOException {
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 	}
 
 	public void handlebringselectedexam(int chosenExamID) throws IOException {
@@ -570,7 +569,7 @@ public class SimpleClient extends AbstractClient {
 	}
 
 	private void handleconfirmsolvedexamFromServer() throws IOException {
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 	}
 
 	public void handleallExamstoShowResultsManager() throws IOException {
@@ -627,7 +626,7 @@ public class SimpleClient extends AbstractClient {
 
 	private void handleAddTimeforExamTeacherFromServer() throws IOException {
 
-		App.getInstance().showTeacherView();
+		App.getInstance().showTeacherView(null);
 		
 			
 	}
@@ -649,14 +648,16 @@ public class SimpleClient extends AbstractClient {
 	}
 	public int handleifextra(int exam_id) throws IOException {
 		commandRequest = true;
-		command = new Command((Object)exam_id, CommandType.ifextra);
+		command = new Command(exam_id, CommandType.ifextra);
 		SimpleClient.getClient().sendToServer(command);
 		waitForServerResponse();
 		return handleifextraFromServer();
 	}
 
 	private int handleifextraFromServer() {
-		return (int) command.getCommand();
+		int extra = (int) command.getCommand();
+		System.out.println(extra);
+		return extra;
 		
 	}
 
@@ -688,7 +689,7 @@ public class SimpleClient extends AbstractClient {
 
 	private void handleconfirmingtheaddingTimeByManagerFromServer() throws IOException {
 
-		App.getInstance().showManagerView();
+		App.getInstance().showManagerView(null);
 	}
 
 

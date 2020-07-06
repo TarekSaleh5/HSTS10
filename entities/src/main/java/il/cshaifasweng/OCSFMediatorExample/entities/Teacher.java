@@ -80,12 +80,16 @@ public class Teacher implements Serializable {
 	
 	public Teacher getTeacherByuserName(String userName1)
 	{
-		Teacher chosenTeacher = null;
+		System.out.println("teacher name " +  userName1 + " getTeacherByuserName function");
+
+		Teacher chosenTeacher =new Teacher();
 		List<Teacher> teachers = new  ArrayList<Teacher>();
 		teachers = InitlizeDataBase.getAllteachers();
+		
+	
 		for(Teacher teacher : teachers)
 		{
-			if (teacher.userName.equalsIgnoreCase(userName1))
+			if (teacher.getUserName().equalsIgnoreCase(userName1))
 			{
 				chosenTeacher = teacher;
 			}

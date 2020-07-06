@@ -18,15 +18,16 @@
 	<children>
 		<ImageView fitHeight="400.0" fitWidth="600.0">
 			<image>
-				<Image url="@primaryImage.jpg" />
+			<Image url="@primary2.jpg" />
+<!-- 				<Image url="@primaryImage.jpg" /> -->
 			</image>
 		</ImageView>
-		<Text fill="#670101" layoutX="198.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to HSTS">
+		<Text fill="#d32323" layoutX="172.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to HSTS">
 			<font>
-				<Font name="Algerian" size="24.0" />
+				<Font name="Algerian" size="30.0" />
 			</font>
 		</Text>
-		<Button fx:id="loginbtn" layoutX="232.0" layoutY="328.0" mnemonicParsing="false" onAction="#loginac" prefHeight="31.0" prefWidth="70.0" text="Login">
+		<Button fx:id="loginbtn" layoutX="265.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginac" prefHeight="31.0" prefWidth="70.0" text="Login">
 			<effect>
 				<Lighting>
 					<bumpInput>
@@ -38,11 +39,17 @@
 				</Lighting>
 			</effect>
 		</Button>
-		<TextField fx:id="usertxt" layoutX="193.0" layoutY="104.0" prefHeight="25.0" prefWidth="150.0" />
-		<PasswordField fx:id="passtxt" layoutX="192.0" layoutY="179.0" prefHeight="25.0" prefWidth="150.0" />
-		<Text fill="WHITE" layoutX="198.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" />
-		<Text fill="WHITE" layoutX="200.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" />
-		<MenuButton fx:id="interfaceid" layoutX="465.0" layoutY="37.0" mnemonicParsing="false" onAction="#interfaceac" text="Choose Interface">
+		<TextField fx:id="usertxt" layoutX="88.0" layoutY="115.0" prefHeight="25.0" prefWidth="150.0" />
+		<PasswordField fx:id="passtxt" layoutX="88.0" layoutY="189.0" prefHeight="25.0" prefWidth="150.0" />
+		<Text fill="WHITE" layoutX="92.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+		<Text fill="WHITE" layoutX="95.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+		<MenuButton fx:id="interfaceid" layoutX="465.0" layoutY="69.0" mnemonicParsing="false" onAction="#interfaceac" prefHeight="27.0" prefWidth="123.0" text="Choose Interface">
 			<items>
 				<MenuItem fx:id="studentid" mnemonicParsing="false" onAction="#studentac" text="Student" />
 				<MenuItem fx:id="teacherid" mnemonicParsing="false" onAction="#teacherac" text="Teacher" />
@@ -59,7 +66,7 @@
 				<Font name="Wingdings" size="12.0" />
 			</font>
 		</MenuButton>
-		<Text fx:id="usernametext" fill="WHITE" layoutX="198.0" layoutY="226.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" underline="true" wrappingWidth="149.9999999999999">
+		<Text fx:id="usernametext" fill="WHITE" layoutX="88.0" layoutY="250.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" underline="true" wrappingWidth="149.9999999999999">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>

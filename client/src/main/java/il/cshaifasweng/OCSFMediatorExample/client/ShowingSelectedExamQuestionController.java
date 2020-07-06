@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -66,6 +67,18 @@ public class ShowingSelectedExamQuestionController {
     
     @FXML
     private Label lastquestionlabel;
+    
+    @FXML
+    private RadioButton radiobtn1;
+
+    @FXML
+    private RadioButton radiobtn3;
+
+    @FXML
+    private RadioButton radiobtn2;
+
+    @FXML
+    private RadioButton radiobtn4;
 
     static String whatiam; 
     static Exam exam = new Exam();
@@ -198,6 +211,41 @@ public class ShowingSelectedExamQuestionController {
     	answer4txt.setText(questions.get(i).getAnswers().get(3).getAnswer());
       	teachercmnttxt.setText(commentPerTeacherList.get(i));
       	studntcmnttxt.setText(commentPerStudentList.get(i));
+      	int correctAnwer = questions.get(i).getCorrectAnswer();
+    	switch(correctAnwer) {
+        
+        case 1:
+        	radiobtn1.setSelected(true);
+        	radiobtn2.setSelected(false);
+        	radiobtn3.setSelected(false);
+        	radiobtn4.setSelected(false);
+
+        	break;
+        
+        case 2:
+        	radiobtn2.setSelected(true);
+        	radiobtn1.setSelected(false);
+        	radiobtn3.setSelected(false);
+        	radiobtn4.setSelected(false);
+
+        	break;
+
+        case 3:
+        	radiobtn3.setSelected(true);
+        	radiobtn1.setSelected(false);
+        	radiobtn2.setSelected(false);
+        	radiobtn4.setSelected(false);
+
+        	break;
+
+        case 4:
+        	radiobtn4.setSelected(true);
+        	radiobtn1.setSelected(false);
+        	radiobtn2.setSelected(false);
+        	radiobtn3.setSelected(false);
+
+        	break;
+    	}
 	  	
 	  	String gradesString = Double.toString(gradesDoubles.get(i));
 
@@ -255,6 +303,10 @@ public class ShowingSelectedExamQuestionController {
         assert teachercmnttxt != null : "fx:id=\"teachercmnttxt\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
         assert studntcmnttxt != null : "fx:id=\"studntcmnttxt\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
         assert gradetxt != null : "fx:id=\"gradetxt\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
+        assert radiobtn1 != null : "fx:id=\"radiobtn1\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
+        assert radiobtn3 != null : "fx:id=\"radiobtn3\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
+        assert radiobtn2 != null : "fx:id=\"radiobtn2\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
+        assert radiobtn4 != null : "fx:id=\"radiobtn4\" was not injected: check your FXML file 'showingselectedexamquestions.fxml'.";
 
         FillTheQuestions(questionNum);
     }

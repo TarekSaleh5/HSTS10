@@ -24,7 +24,7 @@ public class LastStageController {
     @FXML
     void anotheracac(ActionEvent event) throws IOException {
     																////remember to fix this we need to send person interface 
-    	App.getInstance().showTeacherView();
+    	App.getInstance().showTeacherView(null);
     }
 
     @FXML

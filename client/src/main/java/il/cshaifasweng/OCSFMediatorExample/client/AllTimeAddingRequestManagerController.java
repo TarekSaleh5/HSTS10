@@ -46,12 +46,22 @@ public class AllTimeAddingRequestManagerController {
 	}
 
 	@FXML
-    void backac(ActionEvent event) {
-
+    void backac(ActionEvent event) throws IOException {
+    String [] msg =null;
+		App.getInstance().showManagerView(msg);
     }
 
     @FXML
     void signoutac(ActionEvent event) {
+
+    	try {
+			App.getInstance().LogOut();
+			App.getInstance().showBackToPrimaryView();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
     }
 

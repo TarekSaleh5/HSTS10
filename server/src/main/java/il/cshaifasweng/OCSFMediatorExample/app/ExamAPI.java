@@ -268,12 +268,22 @@ public class ExamAPI {
 	}
 
 	public static void BringaSelectedExam(Command command, ConnectionToClient client) {
+		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
 		List<Question> allexamQuestions = new ArrayList<Question>();
 		List<Double> graded = new ArrayList<Double>();
 		int id_examSelected = (int) command.getCommand();
+		System.out.println(id_examSelected+"0.5");
 		Exam exam = new Exam();
+		System.out.println(id_examSelected);
 		exam = exam.getExamByID(id_examSelected);
-
+		System.out.println(id_examSelected);
+		System.out.println(exam.getId());
+	
+		
+		
+		
+		
 		String questionString;
 		String answer0String;
 		String answer1String;
@@ -282,10 +292,14 @@ public class ExamAPI {
 		double grade;
 		String teatchercomment;
 		String studentStringcomment;
-
+		double duration;
+		duration=exam.getDuration();
+		System.out.println(duration);
 		command.setCommand(exam);
 		allexamQuestions = exam.getQuestions();
 		graded = exam.getGrades();
+		System.out.println(allexamQuestions.size());
+		
 		for (int i = 0; i < allexamQuestions.size(); i++) {
 			questionString = exam.getQuestions().get(i).getQuestion();
 			answer0String = allexamQuestions.get(i).getAnswers().get(0).getAnswer();
@@ -327,7 +341,7 @@ public class ExamAPI {
 		Statement stmt = connectionToDB();
 		List<Object> examsInfo = new ArrayList<Object>();
 		examsInfo = (List<Object>) command.getCommand();
-		Exam exam = null;
+		Exam exam = null;////////////////////
 		exam = (Exam) examsInfo.get(0);
 		int[] choosenAswers = new int[exam.getQuestions().size()];
 		choosenAswers = (int[]) examsInfo.get(1);
@@ -482,6 +496,8 @@ public class ExamAPI {
 		String sql = "UPDATE exam SET Onexecute = 0 WHERE id = '" + exam_id + "'";
 		stmt.executeUpdate(sql);
 		sql = "UPDATE exam SET code = -1 WHERE id = '" + exam_id + "'";
+		stmt.executeUpdate(sql);
+		sql = "UPDATE exam SET timeRequest = 0 WHERE id = '" + exam_id + "'";
 		stmt.executeUpdate(sql);
 //		Exam exam = new Exam();
 //		char[] nullarr = null;
@@ -671,6 +687,7 @@ public class ExamAPI {
 	public static void confirmSolvedExam(Command command, ConnectionToClient client) throws SQLException {
 
 		Statement stmt = connectionToDB();
+		Statement stmt1 = connectionToDB();
 		String[] solvedinfoStrings = (String[]) command.getCommand();
 		String solvedidstring = solvedinfoStrings[0];
 		int solvedID = Integer.parseInt(solvedidstring);
@@ -691,8 +708,12 @@ public class ExamAPI {
 		stmt.executeUpdate(sql3);
 
 		String sql4 = "UPDATE solvedexam SET checkedornot = 1 WHERE id ='" + solvedID + "'";
-		stmt.executeUpdate(sql4);
+		stmt1.executeUpdate(sql4);
 
+		String sql5 = "SELECT * FROM solvedexam WHERE id = '" + solvedID + "'";
+
+
+		System.out.println("finished confirmSolvedExam function ");
 		try {
 			client.sendToClient(command);
 		} catch (IOException e) {
@@ -800,6 +821,7 @@ public class ExamAPI {
 	}
 
 	public static void bringTimeRequestExamManager(Command command, ConnectionToClient client) throws SQLException {
+		System.out.println("bringTimeRequestExamManager function ");
 		Statement stmt = connectionToDB();
 		String sql1 = "SELECT * FROM exam WHERE timeRequest = 1";
 		ResultSet rs = stmt.executeQuery(sql1);
@@ -811,7 +833,7 @@ public class ExamAPI {
 			Object[] examInfoArray = new Object[5];
 
 			int examID = rs.getInt("id");
-			double duration = rs.getInt("duration");
+			double duration = rs.getDouble("duration");
 			int executaion = rs.getInt("examExecutaion");
 			int courseid = rs.getInt("course_id");
 			int teachid = rs.getInt("teacher_id");
@@ -820,9 +842,13 @@ public class ExamAPI {
 			teacher = teacher.getTeacherByuserID(teachid);
 			String fullnameString = teacher.getFirstName() + " " + teacher.getLastName();
 
+			System.out.println(fullnameString);
+			
+			
 			Course course = new Course();
 			course = course.getCourseByID(courseid);
 			String coursenameString = course.getCourseName();
+			System.out.println(coursenameString);
 
 			examInfoArray[0] = examID;
 			examInfoArray[1] = duration;

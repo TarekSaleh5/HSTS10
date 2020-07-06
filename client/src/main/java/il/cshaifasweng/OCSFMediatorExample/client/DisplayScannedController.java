@@ -143,7 +143,9 @@ public class DisplayScannedController {
 		}
 		if (questionNum == questions.size() - 2) {
 			nextbtn.setVisible(true);
-			backbtn.setVisible(true);
+			if(questions.size()>2) {
+				backbtn.setVisible(true);
+			}
 		}
 
 		FillTheQuestions(questionNum);

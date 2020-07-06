@@ -48,12 +48,32 @@ public class StartExamAPI {
 					public void run() {
 						try {
 							sleep(duration * 60000);
+							String sql0 = "SELECT * FROM exam WHERE code = '" + Code + "'";
+							ResultSet rs;
+							try {
+								rs = stmt.executeQuery(sql0);
+								rs.next();
+								int approved = rs.getInt("timeRequest");
+								if (approved == 2) {
+									int extra = (int) rs.getDouble("howMuchTimeToADD");
+									sleep(extra * 60000);
+								}
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							
 							String sql1 = "UPDATE exam SET Onexecute = 0 WHERE id = '" + exam_id + "'";
 							String sql2 = "UPDATE exam SET code = -1 WHERE id = '" + exam_id + "'";//yes3ed rabak
+							String sql3 = "UPDATE exam SET timeRequest = 0 WHERE id = '" + exam_id + "'";
+							String sql4 = "UPDATE exam SET howMuchTimeToADD = 0 WHERE id = '" + exam_id + "'";
 							try {
 								stmt.executeUpdate(sql1);
 								
 								stmt.executeUpdate(sql2);
+								stmt.executeUpdate(sql3);
+								stmt.executeUpdate(sql4);
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -130,7 +150,7 @@ public class StartExamAPI {
 	}
 	
 	public static void checkifextra(Command command, ConnectionToClient client) throws SQLException {
-		
+		System.out.println("checkifextra function ");
 		String name, pass, url;
 		url = "jdbc:mysql://127.0.0.1/hstsdatabase";
 		name = "root";
@@ -139,17 +159,25 @@ public class StartExamAPI {
 		myConnection = DriverManager.getConnection(url, name, pass);
 		Statement stmt = (Statement) myConnection.createStatement();
 		int exam_id= (int) command.getCommand();
-		System.out.println("8744444444444444");
+		;
 		String sql="SELECT * FROM exam WHERE id = '" + exam_id + "' AND timeRequest = 2";
 		ResultSet rs = stmt.executeQuery(sql);
-		int extra;
+		double  extra;
+		int extratime = 0;
 		if(rs.next()) {
-			 extra = (int) rs.getDouble("howMuchTimeToADD");
+			System.out.println(" true extra ");
+
+			 extra = rs.getDouble("howMuchTimeToADD");
+			 extratime = (int) extra;
 		}else {
+			System.out.println(" false extra ");
+
 			extra=0;
 		}
-		
-		command.setCommand(extra);
+		System.out.println(" EXITING checkifextra function ");
+		System.out.println(extratime + " = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+		command.setCommand(extratime);
 
 		try {
 			client.sendToClient(command);

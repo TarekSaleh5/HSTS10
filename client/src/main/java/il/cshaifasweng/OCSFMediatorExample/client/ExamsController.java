@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -49,8 +50,14 @@ public class ExamsController {
     @FXML
     private Button nextbtn;
     
-    Object[] examInfoObjects = new Object [9];
+    @FXML
+    private Label durationlabel;
     
+    @FXML
+    private Label courselabel;
+
+    
+    Object[] examInfoObjects = new Object [9];
 
 
     
@@ -93,8 +100,26 @@ public class ExamsController {
         examInfoObjects[3] = comenttxt.getText();
         examInfoObjects[4] = cmntformetxt.getText();
         
-        
-        App.getInstance().bringquestionsforspecialcoursebysubject(examInfoObjects);
+        if(chosecoursebtn.getText().equalsIgnoreCase("Choose Course"))
+        {
+        	durationlabel.setVisible(false);
+        	courselabel.setVisible(true);
+  		}
+        else if(durationtxt.getText().trim().isEmpty())
+        {
+        	durationlabel.setVisible(true);
+        	courselabel.setVisible(false);
+        }
+        else if(!(durationtxt.getText().matches("[0-9]+")))
+        {
+        	courselabel.setVisible(false);
+        	durationlabel.setText("Invalid Duration!");
+        	durationlabel.setVisible(true);
+
+        }
+        else {
+            App.getInstance().bringquestionsforspecialcoursebysubject(examInfoObjects);
+		}
 
 
 
@@ -125,13 +150,21 @@ public class ExamsController {
     
     @FXML
     void initialize() {
+    	
+    	courselabel.setVisible(false);
+    	durationlabel.setVisible(false);
     	int i = 0;
+    	
         assert signoutbtn != null : "fx:id=\"signoutbtn\" was not injected: check your FXML file 'exams.fxml'.";
         assert backbtn != null : "fx:id=\"backbtn\" was not injected: check your FXML file 'exams.fxml'.";
         assert chosecoursebtn != null : "fx:id=\"chosecoursebtn\" was not injected: check your FXML file 'exams.fxml'.";
         assert comenttxt != null : "fx:id=\"comenttxt\" was not injected: check your FXML file 'exams.fxml'.";
         assert cmntformetxt != null : "fx:id=\"cmntformetxt\" was not injected: check your FXML file 'exams.fxml'.";
         assert durationtxt != null : "fx:id=\"durationtxt\" was not injected: check your FXML file 'exams.fxml'.";
+        assert nextbtn != null : "fx:id=\"nextbtn\" was not injected: check your FXML file 'exams.fxml'.";
+        assert durationlabel != null : "fx:id=\"durationlabel\" was not injected: check your FXML file 'exams.fxml'.";
+        assert courselabel != null : "fx:id=\"courselabel\" was not injected: check your FXML file 'exams.fxml'.";
+
         
         
         for (Course course : courses)

@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 
@@ -37,12 +38,15 @@ public class DisplayExamsToSeeResultsController {
 
     @FXML
     private Button DisplaySelectedExambtn;
+    
+    @FXML
+    private Label noexamisselectedlabel;
 
     static String whatiam; 
     static private List<Exam> AllExamToSeeResults = new ArrayList<Exam>();
     
     
-    public DisplayExamsToSeeResultsController(List<Exam> AllExamToSeeResults,String whatiam) {  //////// what the fk is whatiam for???????
+    public DisplayExamsToSeeResultsController(List<Exam> AllExamToSeeResults,String whatiam) {  
 
     	this.AllExamToSeeResults = AllExamToSeeResults;
     	this.whatiam = whatiam;
@@ -64,12 +68,19 @@ public class DisplayExamsToSeeResultsController {
     	{
     		selectedString += mString;
     	}
+    	if(selectedString.equalsIgnoreCase(""))
+    	{
+       	 noexamisselectedlabel.setVisible(true);
 
-    	String chosen = selectedString.substring(9, 15);
+    	}
+    	else {
+    		String chosen = selectedString.substring(9, 15);
+        	int chosenintger =Integer.parseInt(chosen);
+        	System.out.println(chosenintger);
+        	App.getInstance().bringallsolvedExams(chosenintger);
+		}
+
     	
-    	int chosenintger =Integer.parseInt(chosen);
-    	System.out.println(chosenintger);
-    	App.getInstance().bringallsolvedExams(chosenintger);
 
     }
 
@@ -91,6 +102,7 @@ public class DisplayExamsToSeeResultsController {
     @FXML
     void initialize() {
     	 int i = 0 ;
+    	 noexamisselectedlabel.setVisible(false);
     	ObservableList<String> itemStrings;
 		listViewid.setOrientation(Orientation.VERTICAL);
     	
@@ -101,6 +113,7 @@ public class DisplayExamsToSeeResultsController {
         assert backbtn != null : "fx:id=\"backbtn\" was not injected: check your FXML file 'displayexamstoseeResults.fxml'.";
         assert listViewid != null : "fx:id=\"listViewid\" was not injected: check your FXML file 'displayexamstoseeResults.fxml'.";
         assert DisplaySelectedExambtn != null : "fx:id=\"DisplaySelectedExambtn\" was not injected: check your FXML file 'displayexamstoseeResults.fxml'.";
+        assert noexamisselectedlabel != null : "fx:id=\"noexamisselectedlabel\" was not injected: check your FXML file 'displayexamstoseeResults.fxml'.";
 
         for (Exam exam : AllExamToSeeResults)
 		  { 

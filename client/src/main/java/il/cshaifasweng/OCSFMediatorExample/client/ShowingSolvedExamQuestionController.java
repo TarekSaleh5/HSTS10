@@ -78,8 +78,17 @@ public class ShowingSolvedExamQuestionController {
     
     @FXML
     private TextArea generalcomnttxt;
-
     
+    @FXML
+    private Label apealinginfolabel;
+
+    @FXML
+    private Label inforequiredlabel;
+
+    @FXML
+    private Label invalidgradelabel;
+    
+   
     static solvedExam solvedexam ;
     static String whatiam; 
     static Exam exam = new Exam();
@@ -99,12 +108,7 @@ public class ShowingSolvedExamQuestionController {
     	this.exam=solvedexam.getExam();
     	this.whatiam = whatiam;
     	
-		System.out.println(solvedexam.getExam().getId());
-		System.out.println(solvedexam.getExam().getQuestions().get(1).getQuestion());
-		System.out.println(solvedexam.getExam().getQuestions().get(0).getAnswers().get(0).getAnswer());
-		System.out.println(solvedexam.getChosenAnswers().get(0));
-		System.out.println(solvedexam.getExam().getQuestions().get(0).getCorrectAnswer());
-
+		
     	
 	}
     
@@ -113,13 +117,29 @@ public class ShowingSolvedExamQuestionController {
 
 	@FXML
     void changegradeac(ActionEvent event) {
+		
+		apealinginfolabel.setVisible(true);
     	finalgradetxt.setEditable(true);
     	explainationtxt.setVisible(true);
+    
 
     }
 
     @FXML
     void confirmac(ActionEvent event) throws IOException {
+    	if(!(finalgradetxt.getText().matches("[0-9]+")))
+    	{
+        	invalidgradelabel.setVisible(true);
+        	inforequiredlabel.setVisible(false);
+
+    	}
+    	else if (explainationtxt.getText().trim().isEmpty() && explainationtxt.isVisible())
+    	{
+        	invalidgradelabel.setVisible(false);
+        	inforequiredlabel.setVisible(true);
+
+    	}
+    	else {
     	String gradedString = finalgradetxt.getText();
     	String generalcomntdtxt = generalcomnttxt.getText();
     	String explainedString = explainationtxt.getText();
@@ -128,12 +148,11 @@ public class ShowingSolvedExamQuestionController {
     	solvedInfo[2] = generalcomntdtxt;
     	solvedInfo[3] = explainedString;
     	solvedInfo[0] = solvedidString;    	
-    	System.out.println("AAAAA");
     	System.out.println(gradedString);
     	System.out.println(generalcomntdtxt);
     	System.out.println(explainedString);
     	App.getInstance().confirmsolvedexam(solvedInfo);
-
+    	}
     }
 
     @FXML
@@ -214,8 +233,9 @@ public class ShowingSolvedExamQuestionController {
     }
 
     @FXML
-    void signoutac(ActionEvent event) {
-
+    void signoutac(ActionEvent event) throws IOException {
+    	App.getInstance().LogOut();
+    	App.getInstance().showBackToPrimaryView();
     }
     
     
@@ -288,6 +308,10 @@ public class ShowingSolvedExamQuestionController {
     @FXML
     void initialize() {
     	
+    	apealinginfolabel.setVisible(false);
+    	inforequiredlabel.setVisible(false);
+    	invalidgradelabel.setVisible(false);
+    	
     	int finalgrade =solvedexam.getGrade();
     	String finalgradeString = String.valueOf(finalgrade);
     	finalgradetxt.setText(finalgradeString);
@@ -296,13 +320,20 @@ public class ShowingSolvedExamQuestionController {
     	gradesDoubles = exam.getGrades();
     	chosenanswers = solvedexam.getChosenAnswers();
 
-    	lastQuestionLabel.setVisible(false);
-    	changegradebtn.setVisible(false);
-    	finalgradetxt.setVisible(false);
-    	explainationtxt.setVisible(false);
-    	confirmbtn.setVisible(false);
     	
-    	finalgradetxt.setEditable(false);
+    	explainationtxt.setVisible(false);
+
+    
+    	if(exam.getQuestions().size() != 1)
+    	{
+	    	lastQuestionLabel.setVisible(false);
+	    	changegradebtn.setVisible(false);
+	    	finalgradetxt.setVisible(false);
+	    	confirmbtn.setVisible(false);
+	    	finalgradetxt.setEditable(false);
+    	}
+
+    	
 
         assert qbackbtn != null : "fx:id=\"qbackbtn\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
         assert signoutbtn != null : "fx:id=\"signoutbtn\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
@@ -322,10 +353,13 @@ public class ShowingSolvedExamQuestionController {
         assert finalgradetxt != null : "fx:id=\"finalgradetxt\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
         assert explainationtxt != null : "fx:id=\"explainationtxt\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
         assert generalcomnttxt != null : "fx:id=\"generalcomnttxt\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
+        assert apealinginfolabel != null : "fx:id=\"apealinginfolabel\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
+        assert inforequiredlabel != null : "fx:id=\"inforequiredlabel\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
+        assert invalidgradelabel != null : "fx:id=\"invalidgradelabel\" was not injected: check your FXML file 'showingsolvedexamquestion.fxml'.";
 
         if(whatiam.equalsIgnoreCase("Manager"))
         {
-        	generalcomnttxt.setVisible(false);
+        	generalcomnttxt.setEditable(false);;
         }
         FillTheQuestions(questionNum);
     }

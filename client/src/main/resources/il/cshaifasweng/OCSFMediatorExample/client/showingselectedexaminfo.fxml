@@ -9,37 +9,52 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowingSelectedExamInfo">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0">
-         <image>
-            <Image url="@../../../../../../../../../../../../76785673-mockup-for-check-list-empty-note-paper-with-pen-on-brown-wood-background-office-writer-or-study-conc.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="signoutbtn" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#signoutac" text="Sign Out">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowingSelectedExamInfo">
+	<children>
+		<ImageView fitHeight="400.0" fitWidth="600.0" layoutY="-4.0">
+			<image>
+				<Image url="@bluebackgroundteacher.jpg" />
+			</image>
+		</ImageView>
+		<Button fx:id="signoutbtn" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#signoutac" text="Log Out">
+			<font>
+				<Font name="Aharoni Bold" size="12.0" />
+			</font>
+		</Button>
+		<Button fx:id="backbtn" layoutX="522.0" layoutY="363.0" mnemonicParsing="false" onAction="#backac" prefHeight="22.0" prefWidth="65.0" text="back">
+			<font>
+				<Font name="Aharoni Bold" size="12.0" />
+			</font>
+		</Button>
+		<TextArea fx:id="comenttxt" layoutX="22.0" layoutY="218.0" prefHeight="42.0" prefWidth="247.0" />
+		<Text fill="WHITE" layoutX="20.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" wrappingWidth="119.8460693359375">
          <font>
-            <Font name="Aharoni Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="backbtn" layoutX="522.0" layoutY="363.0" mnemonicParsing="false" onAction="#backac" prefHeight="22.0" prefWidth="65.0" text="back">
+            <Font size="18.0" />
+         </font></Text>
+		<TextArea fx:id="cmntformetxt" layoutX="24.0" layoutY="306.0" prefHeight="42.0" prefWidth="180.0" />
+		<Text fill="WHITE" layoutX="25.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments For Me :">
          <font>
-            <Font name="Aharoni Bold" size="12.0" />
-         </font>
-      </Button>
-      <TextArea fx:id="comenttxt" layoutX="22.0" layoutY="218.0" prefHeight="42.0" prefWidth="247.0" />
-      <Text fill="WHITE" layoutX="22.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments :" wrappingWidth="72.8460693359375" />
-      <TextArea fx:id="cmntformetxt" layoutX="24.0" layoutY="320.0" prefHeight="42.0" prefWidth="126.0" />
-      <Text fill="WHITE" layoutX="24.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments For Me :" />
-      <TextField fx:id="durationtxt" layoutX="20.0" layoutY="155.0" />
-      <Text fill="WHITE" layoutX="22.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration :" wrappingWidth="72.8460693359375" />
-      <Button fx:id="nextbtn" layoutX="416.0" layoutY="363.0" mnemonicParsing="false" onAction="#nextac" prefHeight="22.0" prefWidth="65.0" text="next">
+            <Font size="18.0" />
+         </font></Text>
+		<TextField fx:id="durationtxt" layoutX="20.0" layoutY="145.0" />
+		<Text fill="WHITE" layoutX="24.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:" wrappingWidth="112.8460693359375">
          <font>
-            <Font name="Aharoni Bold" size="12.0" />
-         </font>
-      </Button>
-      <TextField fx:id="coursenametxt" layoutX="20.0" layoutY="70.0" />
-      <Text fill="WHITE" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name :" wrappingWidth="94.44610595703125" />
-      <TextField fx:id="createdBytxt" layoutX="169.0" layoutY="322.0" prefHeight="42.0" prefWidth="230.0" />
-      <Text fill="WHITE" layoutX="174.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created By :" wrappingWidth="94.44610595703125" />
-   </children>
+            <Font size="18.0" />
+         </font></Text>
+		<Button fx:id="nextbtn" layoutX="416.0" layoutY="363.0" mnemonicParsing="false" onAction="#nextac" prefHeight="22.0" prefWidth="65.0" text="next">
+			<font>
+				<Font name="Aharoni Bold" size="12.0" />
+			</font>
+		</Button>
+		<TextField fx:id="coursenametxt" layoutX="20.0" layoutY="70.0" />
+		<Text fill="WHITE" layoutX="25.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name:" wrappingWidth="139.44610595703125">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+		<TextField fx:id="createdBytxt" layoutX="258.0" layoutY="305.0" prefHeight="47.0" prefWidth="207.0" />
+		<Text fill="WHITE" layoutX="258.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created By :" wrappingWidth="126.00000500679016">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+	</children>
 </AnchorPane>

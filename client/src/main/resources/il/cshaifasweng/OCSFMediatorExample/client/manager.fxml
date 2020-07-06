@@ -11,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ManagerController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
-            <Image url="@../../../../../../../../../../../../istock-487974242-1024x620.jpg" />
+            <Image url="@managerinterface.png" />
          </image>
       </ImageView>
-      <Button fx:id="mdsplyexamsbtn" layoutX="472.0" layoutY="114.0" mnemonicParsing="false" onAction="#mdsplyexamsac" prefHeight="36.0" prefWidth="98.0" text="Display Exams">
+      <Button fx:id="mdsplyexamsbtn" layoutX="55.0" layoutY="138.0" mnemonicParsing="false" onAction="#mdsplyexamsac" prefHeight="36.0" prefWidth="231.0" text="Display Exams">
          <font>
-            <Font name="Algerian" size="10.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
          <effect>
             <Lighting>
@@ -32,9 +32,9 @@
                </light>
             </Lighting>
          </effect></Button>
-      <Button fx:id="mdsplyquestionbtn" layoutX="447.0" layoutY="174.0" mnemonicParsing="false" onAction="#mdsplyquestionac" prefHeight="36.0" prefWidth="125.0" text="Display Questions">
+      <Button fx:id="mdsplyquestionbtn" layoutX="311.0" layoutY="138.0" mnemonicParsing="false" onAction="#mdsplyquestionac" prefHeight="36.0" prefWidth="231.0" text="Display Questions">
          <font>
-            <Font name="Algerian" size="10.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
          <effect>
             <Lighting>
@@ -47,9 +47,9 @@
             </Lighting>
          </effect>
       </Button>
-      <Button fx:id="mcnfrmaddtimebtn" layoutX="385.0" layoutY="296.0" mnemonicParsing="false" onAction="#mcnfrmaddtimeac" prefHeight="42.0" prefWidth="186.0" text="Confirm Adding Time">
+      <Button fx:id="mcnfrmaddtimebtn" layoutX="311.0" layoutY="212.0" mnemonicParsing="false" onAction="#mcnfrmaddtimeac" prefHeight="42.0" prefWidth="231.0" text="Confirm Adding Time">
          <font>
-            <Font name="Algerian" size="12.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
          <effect>
             <Lighting>
@@ -62,9 +62,9 @@
             </Lighting>
          </effect>
       </Button>
-      <Button fx:id="mdsplyexamrsltbtn" layoutX="417.0" layoutY="232.0" mnemonicParsing="false" onAction="#mdsplyexamrsltac" prefHeight="42.0" prefWidth="154.0" text="Display Exam Results">
+      <Button fx:id="mdsplyexamrsltbtn" layoutX="55.0" layoutY="212.0" mnemonicParsing="false" onAction="#mdsplyexamrsltac" prefHeight="42.0" prefWidth="231.0" text="Display Exam Results">
          <font>
-            <Font name="Algerian" size="10.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
          <effect>
             <Lighting>
@@ -77,7 +77,7 @@
             </Lighting>
          </effect>
       </Button>
-      <Button fx:id="msignoutbtn" layoutX="510.0" layoutY="30.0" mnemonicParsing="false" onAction="#msignoutac" text="Sign out">
+      <Button fx:id="msignoutbtn" layoutX="473.0" layoutY="319.0" mnemonicParsing="false" onAction="#msignoutac" prefHeight="36.0" prefWidth="65.0" text="Log out">
          <effect>
             <Lighting bumpInput="$null">
                <light>
@@ -99,11 +99,11 @@
             <Font name="Aharoni Bold" size="13.0" />
          </font>
       </Button>
-      <Text fx:id="managerintr" fill="WHITE" layoutX="184.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Interface">
+      <Text fx:id="managerintr" layoutX="125.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Interface">
          <font>
-            <Font name="Algerian" size="24.0" />
+            <Font name="Algerian" size="34.0" />
          </font></Text>
-      <Label fx:id="addingtimerequestlabel" layoutX="231.0" layoutY="317.0" prefHeight="110.0" prefWidth="338.0" text="There is an Adding Time Request, Please Confirm !" textFill="WHITE">
+      <Label fx:id="addingtimerequestlabel" layoutX="55.0" layoutY="276.0" prefHeight="51.0" prefWidth="364.0" text="There is an Adding Time Request, Please Confirm !">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

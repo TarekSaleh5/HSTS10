@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.AllTimeAddingRequestManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.AllTimeAddingRequestManagerController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
-            <Image url="@../../../../../../../../../../../../76785673-mockup-for-check-list-empty-note-paper-with-pen-on-brown-wood-background-office-writer-or-study-conc.jpg" />
+            <Image url="@backgroundgreencolor.jpg" /> 	<!-- change the background for something to the manager -->
          </image>
       </ImageView>
-      <Button fx:id="signoutbtn" layoutX="522.0" layoutY="14.0" mnemonicParsing="false" onAction="#signoutac" text="Sign Out">
+      <Button fx:id="signoutbtn" layoutX="522.0" layoutY="14.0" mnemonicParsing="false" onAction="#signoutac" text="Log out">
          <font>
             <Font name="Aharoni Bold" size="12.0" />
          </font>

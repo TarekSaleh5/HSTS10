@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class DisplaySolvedExam {
@@ -35,9 +36,13 @@ public class DisplaySolvedExam {
     @FXML
     private Button DisplaySelectedExambtn;
     
+    @FXML
+    private Label noexamisselectedlabel;
+    
     static Exam exam;
     
     static int [] solvedexaminfoarray = new int[6];
+    static int [] chosensolvedexamID = new int[6];
     
     static private List<Object> solvedExamInfo = new ArrayList<Object>();
 
@@ -57,21 +62,31 @@ public class DisplaySolvedExam {
 	@FXML
     void DisplaySelectedExamac(ActionEvent event) throws IOException {
 
-		String selectedString = "";
-    	ObservableList<String> exam;
-    	exam = listViewid.getSelectionModel().getSelectedItems();
-    	for (String mString : exam) 
-    	{
-    		selectedString += mString;
-    	}
-
-    //	System.out.println(selectedString);
-
-    	String chosen = selectedString.substring(17,18);
-    	int chosenintger =Integer.parseInt(chosen);
-    	System.out.println(chosenintger);
+//		String selectedString = "";
+//    	ObservableList<String> exam;
+//    	exam = listViewid.getSelectionModel().getSelectedItems();
+//    	for (String mString : exam) 
+//    	{
+//    		selectedString += mString;
+//    	}
+//    	
+//    	if(selectedString.equalsIgnoreCase(""))
+//    	{
+//    		noexamisselectedlabel.setVisible(true);
+//    	}
+//    	else {
+//    		
+//    	String chosen = selectedString.substring(17,19);////////////////////////////////////////////////////////////////////
+//    	int chosenintger =Integer.parseInt(chosen);
+//    	System.out.println(chosenintger);
+		int index = listViewid.getSelectionModel().getSelectedIndex();
+	
+		chosensolvedexamID = (int[]) solvedExamInfo.get(index);
+		int chosenintger = chosensolvedexamID[0];
+		System.out.println(chosenintger);
     	App.getInstance().bringsspecificsolvedexam(chosenintger);
-    }
+    	}
+    
 
     @FXML
     void backac(ActionEvent event) throws IOException {
@@ -93,12 +108,14 @@ public class DisplaySolvedExam {
     	
     	ObservableList<String> itemStrings;
 		listViewid.setOrientation(Orientation.VERTICAL);
+		noexamisselectedlabel.setVisible(false);
 		
         assert signoutbtn != null : "fx:id=\"signoutbtn\" was not injected: check your FXML file 'displaysolvedexam.fxml'.";
         assert backbtn != null : "fx:id=\"backbtn\" was not injected: check your FXML file 'displaysolvedexam.fxml'.";
         assert listViewid != null : "fx:id=\"listViewid\" was not injected: check your FXML file 'displaysolvedexam.fxml'.";
         assert DisplaySelectedExambtn != null : "fx:id=\"DisplaySelectedExambtn\" was not injected: check your FXML file 'displaysolvedexam.fxml'.";
-        
+        assert noexamisselectedlabel != null : "fx:id=\"noexamisselectedlabel\" was not injected: check your FXML file 'displaysolvedexam.fxml'.";
+
         for (Object solvedexaminfo : solvedExamInfo)
 		  { 
 

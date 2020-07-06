@@ -282,17 +282,28 @@ public class Exam implements Serializable
 	
 	public Exam getExamByID(int id)
 	{
-		Exam chosenExam = null;
+		System.out.println(id);
+		Exam chosenExam = new Exam();
 		List<Exam> exams = new  ArrayList<Exam>();
+		
+		int u=0;
 		exams = InitlizeDataBase.getAllexams();
+		System.out.println(id+"2222222222222222222222222222");
+		System.out.println(exams.size());
 		for(Exam exam : exams)
 		{
+			System.out.println(exam.getId());
+			u++;
 			if (exam.getId() == id)
 			{
-				chosenExam = exam;
+				//chosenExam = exam;
+				System.out.println(id);	
+				System.out.println(u+"ggggg");
+				System.out.println(exam.getId());
+				return exam;
 			}
 		}
-		
+		System.out.println("noexam");
 		return chosenExam;
 	}
 	

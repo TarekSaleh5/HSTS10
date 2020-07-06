@@ -311,7 +311,11 @@ public class ShowingListQuestionSubjectController {
 			  answer2txt.setEditable(false);
 			  answer3txt.setEditable(false);
 			  answer3txt.setEditable(false);
-			  
+			  select1btn.setDisable(true);
+			  select2btn.setDisable(true);
+			  select3btn.setDisable(true);
+			  select4btn.setDisable(true);
+
 		   }
     	lastQuestionLabel.setVisible(false);
     	

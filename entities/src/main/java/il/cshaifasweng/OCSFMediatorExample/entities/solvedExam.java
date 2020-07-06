@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import java.io.File;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 
 import il.cshaifasweng.OCSFMediatorExample.databaseinitilize.InitlizeDataBase;
 
-////we may need id for solvedexam
+
 @Entity
 @Table(name = "solvedexam")
 public class solvedExam implements Serializable {
@@ -29,7 +29,7 @@ public class solvedExam implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) ////////// ******** cascade may be wrong
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
 	@JoinColumn(name = "exam_id")
 	private Exam exam;
 
@@ -152,19 +152,23 @@ public class solvedExam implements Serializable {
 	}
 
 	public static List<solvedExam> getsolvedExamByStudentId(String studentid) {
-		System.out.println("bbbbbbbbbbbbbb");
+		
+		System.out.println("getsolvedExamByStudentId function");
+		
 		Exam exam = new Exam();
 		List<Integer> chosenanswer = new ArrayList<Integer>();
 		List<solvedExam> chosenSolvedExam = new  ArrayList<solvedExam>();
 		List<solvedExam> solvedexams = new ArrayList<solvedExam>();
-		System.out.println("cccccccccccc");
 		File file;
 		solvedexams = InitlizeDataBase.getallsolvedExam();
 		
-		System.out.println("ddddddddddddd");
+		System.out.println(solvedexams.size());
 		for (solvedExam solvedexam : solvedexams) {
 
-			if (Integer.toString(solvedexam.getStudent().getId()).equals(studentid) && solvedexam.getcheckedornot()==true) {
+			System.out.println(studentid);
+			System.out.println(Integer.toString(solvedexam.getStudent().getId()));
+			System.out.println(solvedexam.getcheckedornot());
+			if (Integer.toString(solvedexam.getStudent().getId()).equalsIgnoreCase(studentid) && solvedexam.getcheckedornot()==true) {
 				System.out.println("bifbbbb");
 
 				System.out.println(solvedexam.getGrade());
@@ -223,7 +227,7 @@ public class solvedExam implements Serializable {
 
 	}
   public solvedExam getsolvedExamBySolvedId(int solved)
-	{			  System.out.println("bbbbbbbbbbbbbb");
+	{			 System.out.println(solved);
 	  Exam exam = new Exam();
 	  List <Integer >chosenanswer=new ArrayList<Integer>();
 		solvedExam chosenSolvedExam = new solvedExam();
@@ -231,6 +235,7 @@ public class solvedExam implements Serializable {
 		solvedexams = InitlizeDataBase.getallsolvedExam();
 		for(solvedExam solvedexam : solvedexams)
 		{
+			 System.out.println(solvedexam.getId());
 			
 			if (solvedexam.getId() == solved)
 			{System.out.println("bifbbbb");

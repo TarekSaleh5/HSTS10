@@ -88,6 +88,9 @@ public class ChoosingQuestionController {
     @FXML
     private Button submitbtn;
     
+    @FXML
+    private Label gradeneededlabel;
+    
     
     int questionNum = 0;
     
@@ -123,7 +126,20 @@ public class ChoosingQuestionController {
 
 	@FXML
     void backac(ActionEvent event) throws IOException {
-		
+		gradeneededlabel.setVisible(false);
+    	if (gradetxt.getText().trim().isEmpty() && gradetxt.isVisible() )
+    	{
+    		gradeneededlabel.setText("Grade is needed!");
+    		gradeneededlabel.setVisible(true);
+    	}
+    	
+    	else if(!(gradetxt.getText().matches("[0-9]+")) && gradetxt.isVisible() )
+        {
+    		gradeneededlabel.setText("Invalid Grade!");
+    		gradeneededlabel.setVisible(true);
+        }
+    	else {
+			
 		listscontrolling();
 		gradetxt.setText("");
     	commentstxt.setText("");
@@ -157,7 +173,7 @@ public class ChoosingQuestionController {
     		FillTheQuestions(questionNum);
 
 		}
-    	
+    	}	
     }
     
     
@@ -184,6 +200,20 @@ public class ChoosingQuestionController {
 
     @FXML
     void nextac(ActionEvent event) throws IOException {
+    	gradeneededlabel.setVisible(false);
+    	if (gradetxt.getText().trim().isEmpty() && gradetxt.isVisible())
+    	{
+    		gradeneededlabel.setText("Grade is needed!");
+    		gradeneededlabel.setVisible(true);
+    	}
+    	
+    	else if(!(gradetxt.getText().matches("[0-9]+")) && gradetxt.isVisible())
+        {
+    		gradeneededlabel.setText("Invalid Grade!");
+    		gradeneededlabel.setVisible(true);
+        }
+    	else {
+			
 		
     	listscontrolling();
     	gradetxt.setText("");
@@ -209,14 +239,14 @@ public class ChoosingQuestionController {
     	}
     	
     	else if (questionNum == allQuestions.size()) {
-        	App.getInstance().showTeacherView();
+        	App.getInstance().showTeacherView(null);
     	}
     	
     	else {
     		
     		FillTheQuestions(questionNum);
 		}
-    	
+    	}
     }
 
     @FXML
@@ -261,7 +291,7 @@ public class ChoosingQuestionController {
     }
     
     private void listscontrolling () {
-
+    			
     	if(selectedOrnot[questionNum]&&pressedselect)
     	{
     		
@@ -286,8 +316,10 @@ public class ChoosingQuestionController {
 						}
 	
 			}
-		}}
+		}
+    		}
     	pressedselect=false;
+    	
     }
     
     void FillTheQuestions(int i)
@@ -361,8 +393,10 @@ public class ChoosingQuestionController {
     
     @FXML
     void initialize() {
+    	gradeneededlabel.setVisible(false);
     	pressedselect=false;
     	submitbtn.setVisible(false);
+    	int showlabel = 0;
     	
 		lastqustionlabel.setVisible(false);
 
@@ -393,6 +427,8 @@ public class ChoosingQuestionController {
         assert chose4btn != null : "fx:id=\"chose4btn\" was not injected: check your FXML file 'choosingquestionstoexam.fxml'.";
         assert chose3btn != null : "fx:id=\"chose3btn\" was not injected: check your FXML file 'choosingquestionstoexam.fxml'.";
         assert chose2btn != null : "fx:id=\"chose2btn\" was not injected: check your FXML file 'choosingquestionstoexam.fxml'.";
+        assert gradeneededlabel != null : "fx:id=\"gradeneededlabel\" was not injected: check your FXML file 'choosingquestionstoexam.fxml'.";
+
         
         FillTheQuestions(questionNum);
 

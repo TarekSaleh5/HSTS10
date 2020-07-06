@@ -95,6 +95,7 @@ public class ExamExecutingController {
 	static int duration;
 	static Boolean submitted;
 	static Boolean flag = false;
+	static int extra=0;
 
 	public ExamExecutingController(Exam exam1) {
 		System.out.println("controllll");
@@ -156,7 +157,9 @@ public class ExamExecutingController {
 		if (questionNum == questions.size() - 2) {
 			nextbtn.setVisible(true);
 			submiteditingbtn.setVisible(false);
-			backbtn.setVisible(true);
+			if (questions.size() > 2) {
+				backbtn.setVisible(true);
+			}
 			lastquestionlabel.setVisible(false);
 		}
 
@@ -169,6 +172,7 @@ public class ExamExecutingController {
 		questionNum += 1;
 		quesnum.setText(questionNum + 1 + " / " + numofques);
 		if (questionNum == 1) {
+			
 			backbtn.setVisible(true);
 
 		}
@@ -249,6 +253,14 @@ public class ExamExecutingController {
 		submiteditingbtn.setVisible(false);
 
 		backbtn.setVisible(false);
+		
+		if (questionNum == questions.size() - 1) {
+			FillTheQuestions(questionNum);
+			lastquestionlabel.setVisible(true);
+			submiteditingbtn.setVisible(true);
+			nextbtn.setVisible(false);
+		}
+
 
 		assert signoutbtn != null : "fx:id=\"signoutbtn\" was not injected: check your FXML file 'examexecutintg.fxml'.";
 		assert backbtn != null : "fx:id=\"backbtn\" was not injected: check your FXML file 'examexecutintg.fxml'.";
@@ -300,31 +312,38 @@ public class ExamExecutingController {
 		});
 		new Thread(sleeper).start();
 
-		new Thread() {
-			public void run() {
-				if (duration == 1) {
-					try {
-						int extra = ifextr();
-						if (extra > 0 && !flag) {
-							flag = true;
-							duration += extra;
-							
-						}
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+		 Task<Void> sleeper1 = new Task<Void>() {
+	            @Override
+	            protected Void call() throws Exception {
+	                try {
+	                	while(duration>=0) {
+	                		System.out.println(exam.getId());
+	                		extra = App.getInstance().ifextra(exam.getId());
+	                		System.out.println("THREAAAAAAAAAD STUDENT EXTRA TIME and extra is : "+ extra );
+	                		if(extra!=0) {
+	                			duration+=extra;
+	                			break;
+	                		}
+	                		Thread.sleep(10000);
+	                	}
+	                } catch (InterruptedException e) {
+	                }
+	                return null;
+	            }
+	        };
+	        sleeper1.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+	            @Override
+	            public void handle(WorkerStateEvent event) {
+//	            	if(true) {
+//	            		duration = duration + extra; 
+//					}
+	            	System.out.println("THREAAAAAAAAAD STUDENT EXTRA TIME is OOOUUTT!!!" );
+	            }
+	        });
+	        new Thread(sleeper1).start();
 
-			}
-		}.start();
-
-		System.out.println("enddddddddinittttttttttt");
+	
 
 	}
 
-	static int ifextr() throws IOException {
-		System.out.println("exxxxxxxxxxxxxxxx= " + exam.getId());
-		return App.getInstance().ifextra(exam.getId());
-	}
 }

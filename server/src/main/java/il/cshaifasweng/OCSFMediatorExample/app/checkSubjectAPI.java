@@ -15,6 +15,7 @@ public class checkSubjectAPI {
 	{
 		List <Subject> specficSubjects = new ArrayList<Subject>();
 		String username = (String) command.getCommand();
+		System.out.println("teacher name " + username);
 		Teacher teacher = new Teacher();
 		teacher = teacher.getTeacherByuserName(username);
 		System.out.println(teacher.getFirstName());

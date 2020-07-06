@@ -13,20 +13,37 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 public class logoutAPI {
 
 	
-	public static void logout(Command command, ConnectionToClient client) {
+	public static void logout(Command command, ConnectionToClient client) throws SQLException {
 		String[] arr=new String[1];
 		arr = (String[]) command.getCommand();
 		String userName = arr[0];
+		String type = arr[1];
 		String name, pass, url;
 		url = "jdbc:mysql://127.0.0.1/hstsdatabase";
 		name = "root";
 		pass = "t12345";
 		Connection myConnection;
+		myConnection = DriverManager.getConnection(url, name, pass);
+		Statement stmt = (Statement) myConnection.createStatement();
 		try {
-			myConnection = DriverManager.getConnection(url, name, pass);
-			Statement stmt = (Statement) myConnection.createStatement();
-			String sql = "UPDATE student SET isConnected = 0 WHERE userName = '" + userName + "'";
-			stmt.executeUpdate(sql);
+			switch (type)
+			{
+			case ("Student"):
+				String sql1 = "UPDATE student SET isConnected = 0 WHERE userName = '" + userName + "'";
+				stmt.executeUpdate(sql1);
+				break;
+			
+			case ("Teacher"):
+				String sql2 = "UPDATE teacher SET isConnected = 0 WHERE userName = '" + userName + "'";
+				stmt.executeUpdate(sql2);
+				break;
+			
+			case ("Manager"):
+				String sq3 = "UPDATE manager SET isConnected = 0 WHERE userName = '" + userName + "'";
+				stmt.executeUpdate(sq3);
+				break;
+			}
+			
 			arr[0] = "logout";
 			command.setCommand(arr);
 			client.sendToClient(command);

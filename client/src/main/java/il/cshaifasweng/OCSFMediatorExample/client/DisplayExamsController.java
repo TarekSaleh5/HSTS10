@@ -57,8 +57,18 @@ public class DisplayExamsController {
     
     @FXML
     private Button DisplaySelectedExambtn;
+    
+    @FXML
+    private Label examselectedlabel;
 
-   
+    @FXML
+    private Label codelenghtlabel;
+    
+    @FXML
+    private Label examexecutationlabel;
+
+
+    static int chosenintger;
 
     static private List<Object> examsInfo = new ArrayList<Object>();
     
@@ -92,11 +102,21 @@ public class DisplayExamsController {
     	{
     		selectedString += mString;
     	}
+	
+    	if(selectedString.equalsIgnoreCase(""))
+    	{
+        	System.out.println(chosenintger);
+    		examselectedlabel.setVisible(true);
+        	codelenghtlabel.setVisible(false);
+        	examexecutationlabel.setVisible(false);
+    	}
+    	else {
+        	String chosen = selectedString.substring(9, 15);
+        	chosenintger =Integer.parseInt(chosen);
+        	System.out.println(chosenintger);
+        	App.getInstance().bringselectedexam(chosenintger);
 
-    	String chosen = selectedString.substring(9, 15);
-    	
-    	int chosenintger =Integer.parseInt(chosen);
-    	App.getInstance().bringselectedexam(chosenintger);
+		}
     }
     
 
@@ -126,13 +146,32 @@ public class DisplayExamsController {
     		selectedString += mString;
     	}
 
-    	String chosen = selectedString.substring(9, 15);
     	
-    	int chosenintger =Integer.parseInt(chosen);
     	choseCode = codebtn.getText().toCharArray();
-    	
+    	System.out.println(chosenintger);
+    	if (selectedString.equalsIgnoreCase(""))
+    	{
+    		examselectedlabel.setVisible(true);
+        	codelenghtlabel.setVisible(false);
+        	examexecutationlabel.setVisible(false);
+    	}
+    	else if (examExecutaion == 2 || (!manualbtn.isSelected() && !compbtn.isSelected()))
+    	{
+    		examselectedlabel.setVisible(false);
+        	codelenghtlabel.setVisible(false);
+        	examexecutationlabel.setVisible(true);
+    	}
+    	else if(choseCode.length != 4)
+    	{
+    		examselectedlabel.setVisible(false);
+        	codelenghtlabel.setVisible(true);
+        	examexecutationlabel.setVisible(false);
+    	}
+    	else {
+    	String chosen = selectedString.substring(9, 15); 	
+       	chosenintger =Integer.parseInt(chosen);
     	App.getInstance().GivingCodeToExam(chosenintger,choseCode,examExecutaion);
-
+    	}
     	
     }
     
@@ -166,9 +205,14 @@ public class DisplayExamsController {
 
     @FXML
     void initialize() {
-    	System.out.println("QQQQ5");
-
+    	
+    	chosenintger = 0;
+    	examExecutaion = 2;
     	int i = 0 ;
+    	
+    	examexecutationlabel.setVisible(false);
+    	examselectedlabel.setVisible(false);
+    	codelenghtlabel.setVisible(false);
     	manualbtn.setVisible(false);
     	compbtn.setVisible(false);
     	codebtn.setVisible(false);
@@ -195,6 +239,9 @@ public class DisplayExamsController {
         assert codebtn != null : "fx:id=\"codebtn\" was not injected: check your FXML file 'displayexams.fxml'.";
         assert manualbtn != null : "fx:id=\"manualbtn\" was not injected: check your FXML file 'displayexams.fxml'.";
         assert compbtn != null : "fx:id=\"compbtn\" was not injected: check your FXML file 'displayexams.fxml'.";
+        assert examselectedlabel != null : "fx:id=\"examselectedlabel\" was not injected: check your FXML file 'displayexams.fxml'.";
+        assert codelenghtlabel != null : "fx:id=\"codelenghtlabel\" was not injected: check your FXML file 'displayexams.fxml'.";
+        assert examexecutationlabel != null : "fx:id=\"examexecutationlabel\" was not injected: check your FXML file 'displayexams.fxml'.";
 
         
 

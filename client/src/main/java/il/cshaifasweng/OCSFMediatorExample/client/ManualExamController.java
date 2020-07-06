@@ -46,6 +46,7 @@ public class ManualExamController {
 	static int duration;
 	static Boolean submitted;
 	static File file;
+	static int extra;
 
 	public ManualExamController(Exam exam1) {
 
@@ -175,6 +176,36 @@ public class ManualExamController {
 			}
 		});
 		new Thread(sleeper).start();
+		
+		 Task<Void> sleeper1 = new Task<Void>() {
+	            @Override
+	            protected Void call() throws Exception {
+	                try {
+	                	while(duration>=0) {
+	                		System.out.println(exam.getId());
+	                		extra = App.getInstance().ifextra(exam.getId());
+	                		System.out.println("THREAAAAAAAAAD STUDENT EXTRA TIME and extra is : "+ extra );
+	                		if(extra!=0) {
+	                			duration+=extra;
+	                			break;
+	                		}
+	                		Thread.sleep(10000);
+	                	}
+	                } catch (InterruptedException e) {
+	                }
+	                return null;
+	            }
+	        };
+	        sleeper1.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+	            @Override
+	            public void handle(WorkerStateEvent event) {
+//	            	if(true) {
+//	            		duration = duration + extra; 
+//					}
+	            	System.out.println("THREAAAAAAAAAD STUDENT EXTRA TIME is OOOUUTT!!!" );
+	            }
+	        });
+	        new Thread(sleeper1).start();
 
 	}
 }

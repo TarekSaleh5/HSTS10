@@ -36,21 +36,20 @@ public class SimpleServer extends AbstractServer { //////// remember change from
 
 		case loginCommand:
 
-			System.out.println("loginCommand44444444444444444");
-			// client.setInfo("username", msg);
+			System.out.println("loginCommand");
 			loginAPI.checkSpecificUser(command, client);
 			System.out.println("Handling Message:");
 
 			break;
 
 		case loginExamCommand:
-			System.out.println("start exam 1111111111111");
+			System.out.println("start exam");
 			loginExamAPI.checkSpecificUser(command, client);
 			break;
 
 		case checkSubjectCommand:
 
-			System.out.println("checkCommand");
+			System.out.println("checkSpecificSubjectsCommand");
 			checkSubjectAPI.checkSpecificSubjects(command, client);
 			break;
 
@@ -113,8 +112,14 @@ public class SimpleServer extends AbstractServer { //////// remember change from
 			break;
 
 		case logoutCommand:
-			logoutAPI.logout(command, client);
+			try {
+				logoutAPI.logout(command, client);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
+			
 		case bringExamInfoCommand:
 			System.out.println("bringExamInfoCommand");
 

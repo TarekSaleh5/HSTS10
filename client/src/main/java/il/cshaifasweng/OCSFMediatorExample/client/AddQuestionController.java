@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
@@ -65,6 +66,12 @@ public class AddQuestionController {
 
     @FXML
     private Button qsubmtbtn;
+    
+    @FXML
+    private Label nosubjhaschosenlabel;
+    
+    @FXML
+    private Label actionnotcompletedlabel;
     
     int chosenAnswer;
 
@@ -126,19 +133,28 @@ public class AddQuestionController {
     @FXML
     void qbackac(ActionEvent event) throws IOException {
     	
-    	App.getInstance().showTeacherView();
+    	App.getInstance().showTeacherView(null);
 
     }
     @FXML
     void qsubmitac(ActionEvent event) throws IOException {
-
+    		if(chosesubbtn.getText().equalsIgnoreCase("Choose Subject"))
+    		{
+    	    	nosubjhaschosenlabel.setVisible(true);
+    		}
+    		else if(chosenAnswer == 0 || qusttxt.getText().equalsIgnoreCase("") || answer1txt.getText().equalsIgnoreCase("") ||answertxt2.getText().equalsIgnoreCase("") ||answertxt3.getText().equalsIgnoreCase("") ||answertxt4.getText().equalsIgnoreCase(""))
+			{
+    	    	nosubjhaschosenlabel.setVisible(false);
+    	    	actionnotcompletedlabel.setVisible(true);
+			}
+    		else {
     	   	Subject chosenSubject = null;
     	   	for(Subject subject : subjects) {
     			  if(subject.getName().equalsIgnoreCase(chosesubbtn.getText())) 
     			  { 
     				  chosenSubject	= subject; }
     			  }
-
+    	   	
     	  	Answer answer1 = new Answer();
     	   	Answer answer2 = new Answer();
     	 	Answer answer3 = new Answer();
@@ -168,7 +184,7 @@ public class AddQuestionController {
         	System.out.println(newQuestion.getCorrectAnswer());
     	  	App.getInstance().AddQuestion(newQuestion,0);
 
-			  
+    		}
 
     }
     
@@ -185,8 +201,16 @@ public class AddQuestionController {
 
     @FXML
     void initialize() {
-    	
+    	nosubjhaschosenlabel.setVisible(false);
+    	actionnotcompletedlabel.setVisible(false);
     	int i=0;
+    	chosenAnswer = 0;
+    	qusttxt.setText("");
+    	answer1txt.setText("");
+    	answertxt2.setText("");
+    	answertxt3.setText("");
+    	answertxt3.setText("");
+
     	
         assert qbackbtn != null : "fx:id=\"qbackbtn\" was not injected: check your FXML file 'addquestion.fxml'.";
         assert chosesubbtn != null : "fx:id=\"chosesubbtn\" was not injected: check your FXML file 'addquestion.fxml'.";
@@ -200,6 +224,10 @@ public class AddQuestionController {
         assert circle1btn != null : "fx:id=\"circle1btn\" was not injected: check your FXML file 'addquestion.fxml'.";
         assert circle4btn != null : "fx:id=\"circle4btn\" was not injected: check your FXML file 'addquestion.fxml'.";
         assert qsubmtbtn != null : "fx:id=\"qsubmtbtn\" was not injected: check your FXML file 'addquestion.fxml'.";
+        assert nosubjhaschosenlabel != null : "fx:id=\"nosubjhaschosenlabel\" was not injected: check your FXML file 'addquestion.fxml'.";
+        assert actionnotcompletedlabel != null : "fx:id=\"actionnotcompletedlabel\" was not injected: check your FXML file 'addquestion.fxml'.";
+
+
         for (Subject subject : subjects)
         {
         	MenuItem btnButton = new MenuItem();

@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="407.0" fitWidth="600.0">
          <image>
-            <Image url="@../../../../../../../../../../../../101952715-take-the-exam-write-the-exam-hand-with-pen-near-exam-paper-on-yellow-background-top-view-copy-space.jpg" />
+            <Image url="@backgroundgreencolor.jpg" />
          </image>
       </ImageView>
       <Button fx:id="qbackbtn" layoutX="536.0" layoutY="364.0" mnemonicParsing="false" onAction="#qbackac" prefHeight="26.0" prefWidth="53.0" text="Back">
@@ -36,7 +36,7 @@
             <Font name="Aharoni Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="signoutbtn" layoutX="532.0" layoutY="17.0" mnemonicParsing="false" onAction="#signoutac" text="Sign out">
+      <Button fx:id="signoutbtn" layoutX="532.0" layoutY="17.0" mnemonicParsing="false" onAction="#signoutac" text="Log out">
          <effect>
             <Lighting>
                <bumpInput>

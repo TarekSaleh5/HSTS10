@@ -90,6 +90,7 @@ public class PrimaryController {
 
 	@FXML
 	void initialize() {
+		userType = "nointerfacechoosen";
 		assert usertxt != null : "fx:id=\"usertxt\" was not injected: check your FXML file 'primary.fxml'.";
 		assert interfaceid != null : "fx:id=\"interfaceid\" was not injected: check your FXML file 'primary.fxml'.";
 		assert studentid != null : "fx:id=\"studentid\" was not injected: check your FXML file 'primary.fxml'.";

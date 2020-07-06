@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -41,6 +42,12 @@ public class DisplayExamOnExecuteController {
     
     @FXML
     private Button submitbtn;
+    
+    @FXML
+    private Label noexamisselctedlabel;
+
+    @FXML
+    private Label invalidtimelabel;
 
     
     static Object [] examonexecutationinfoarray = new Object[5];
@@ -78,7 +85,18 @@ public class DisplayExamOnExecuteController {
     	{
     		selectedString += mString;
     	}
+    	if(selectedString.equalsIgnoreCase(""))
+    	{
+        	noexamisselctedlabel.setVisible(true);
+        	invalidtimelabel.setVisible(false);
+    	}
 
+    	else if(!timevaluetxt.getText().matches("[0-9]+"))
+    	{
+        	noexamisselctedlabel.setVisible(false);
+        	invalidtimelabel.setVisible(true);
+    	}
+    	else {
     	String [] examonExecuteinfo = new String[3];
 
     	String chosen = selectedString.substring(10, 16);
@@ -87,17 +105,24 @@ public class DisplayExamOnExecuteController {
     	examonExecuteinfo[0] = chosen;
     	examonExecuteinfo[1] = timevalue;
     	App.getInstance().addTimeforExamTeacher(examonExecuteinfo);
-    	
+    	}
 	    }
 	 
     @FXML
     void backac(ActionEvent event) {
-
+    	String [] msg =null;
+		try {
+			App.getInstance().showTeacherView(msg);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML
-    void signoutac(ActionEvent event) {
-
+    void signoutac(ActionEvent event) throws IOException {
+    	App.getInstance().LogOut();
+    	App.getInstance().showBackToPrimaryView();
     }
     
     
@@ -105,6 +130,8 @@ public class DisplayExamOnExecuteController {
     @FXML
     void initialize() {
     	
+    	noexamisselctedlabel.setVisible(false);
+    	invalidtimelabel.setVisible(false);
     	submitbtn.setVisible(false);
     	timevaluetxt.setVisible(false);
     	ObservableList<String> itemStrings;
@@ -116,6 +143,8 @@ public class DisplayExamOnExecuteController {
         assert addtimebtn != null : "fx:id=\"addtimebtn\" was not injected: check your FXML file 'displayexamonexecutaion.fxml'.";
         assert timevaluetxt != null : "fx:id=\"timevaluetxt\" was not injected: check your FXML file 'displayexamonexecutaion.fxml'.";
         assert submitbtn != null : "fx:id=\"submitbtn\" was not injected: check your FXML file 'displayexamonexecutaion.fxml'.";
+        assert noexamisselctedlabel != null : "fx:id=\"noexamisselctedlabel\" was not injected: check your FXML file 'displayexamonexecutaion.fxml'.";
+        assert invalidtimelabel != null : "fx:id=\"invalidtimelabel\" was not injected: check your FXML file 'displayexamonexecutaion.fxml'.";
 
 
         for (int i=0;i<examOnExecutationInfo.size();i++)
